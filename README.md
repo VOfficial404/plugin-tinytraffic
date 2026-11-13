@@ -2,6 +2,12 @@
 
 Halo 2.x 对 [tinytraffic](https://github.com/egoist/tinytraffic) 的集成。tinytraffic 是一个自托管、不使用 Cookie 的网站统计工具。
 
+安装后，Halo 会自动在站点页面中加入统计脚本，并在控制台多出一个「访问统计」页面：
+
+![Halo 控制台中的「访问统计」页面：指标卡片、访客趋势图，以及来源、页面、地区、设备排行](./screenshots/preview.png)
+
+<sub>图中为演示数据。</sub>
+
 ## 特性
 
 - 在主题每个页面的 `head` 标签内注入 tinytraffic 统计脚本，支持脚本的全部选项（站点域名、Hash 路由、出站链接、自定义上报地址）。
