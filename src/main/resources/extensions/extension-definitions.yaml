@@ -1,0 +1,9 @@
+apiVersion: plugin.halo.run/v1alpha1
+kind: ExtensionDefinition
+metadata:
+  name: tinytraffic-rss-telemetry-recorder
+spec:
+  className: io.github.vofficial404.tinytraffic.feed.RssTelemetryRecorder
+  extensionPointName: feed-telemetry-recorder
+  displayName: "tinytraffic RSS 阅读量记录器"
+  description: "将 RSS 中的文章阅读量上报到 tinytraffic"

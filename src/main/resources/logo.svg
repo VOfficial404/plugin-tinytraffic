@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="tinytraffic">
+  <rect width="128" height="128" rx="28" fill="#18181b"/>
+  <g fill="#fafafa">
+    <rect x="30" y="72" width="16" height="28" rx="5"/>
+    <rect x="56" y="52" width="16" height="48" rx="5"/>
+    <rect x="82" y="28" width="16" height="72" rx="5"/>
+  </g>
+</svg>

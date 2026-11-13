@@ -1,0 +1,27 @@
+// Colors of the stats views, declared once per component root. Marks wear the series color;
+// text only ever wears the text tones. The Halo Console has a light surface only.
+@mixin tokens {
+  --tt-surface: #fff;
+  --tt-text: #111827;
+  --tt-text-secondary: #4b5563;
+  --tt-text-muted: #6b7280;
+  --tt-hairline: #e5e7eb;
+  --tt-hover: #f3f4f6;
+  --tt-series: #2a78d6;
+  --tt-series-wash: rgb(42 120 214 / 10%);
+  --tt-series-bar: rgb(42 120 214 / 14%);
+  --tt-up: #15803d;
+  --tt-down: #b91c1c;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

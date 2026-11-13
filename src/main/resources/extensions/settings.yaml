@@ -1,0 +1,86 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: plugin-tinytraffic-settings
+spec:
+  forms:
+    - group: basic
+      label: 基本设置
+      formSchema:
+        - $formkit: url
+          name: endpoint
+          label: tinytraffic 地址
+          placeholder: "https://stats.example.com"
+          help: "tinytraffic 服务的外部访问地址，统计脚本和数据面板都会用到。"
+          validation: required|url
+        - $formkit: text
+          name: domain
+          label: 站点域名
+          placeholder: "example.com"
+          help: "在 tinytraffic 中添加站点时填写的域名，不带 https:// 和 www。留空时统计脚本使用访客当前访问的域名，数据面板使用 Halo 的外部访问地址。"
+
+    - group: tracker
+      label: 统计脚本
+      formSchema:
+        - $formkit: switch
+          name: enabled
+          label: 注入统计脚本
+          value: true
+          help: "在主题每个页面的 head 标签内加入 tinytraffic 统计脚本。如果已经通过主题或代码注入添加过，请关闭此项以免重复统计。"
+        - $formkit: switch
+          name: excludeLoggedIn
+          label: 不统计已登录用户
+          value: false
+          help: "开启后，已登录 Halo 的用户（例如正在预览文章的你）访问时不会加载统计脚本。"
+        - $formkit: switch
+          name: outbound
+          label: 统计出站链接点击
+          value: true
+          help: "访客点击指向其他网站的链接时，记录为目标「Outbound Link: Click」。"
+        - $formkit: switch
+          name: hashMode
+          label: 统计 Hash 路由
+          value: false
+          help: "把 #/path 形式的地址变化当作单独的页面，仅在主题使用 Hash 路由时需要开启。"
+        - $formkit: switch
+          name: rssTelemetry
+          label: 统计 RSS 阅读量
+          value: true
+          help: "需要安装「RSS 订阅」插件。读者在 RSS 阅读器中打开文章时，会记为一次来源是 RSS 的浏览。配置了「读写」权限的 API 密钥后，才能按读者的真实 IP 区分访客和地区。"
+        - $formkit: text
+          name: scriptUrl
+          label: 自定义脚本地址
+          placeholder: "/stats/js/script.js"
+          help: "可选。通过自己的域名反向代理 tinytraffic 时填写，可以是完整地址或以 / 开头的站内路径。留空则使用「tinytraffic 地址」下的 /js/script.js。"
+          validation:
+            - - matches
+              - "/^(?:https?:\\/)?\\/(?!\\/)/"
+          validationMessages:
+            matches: "请填写以 http://、https:// 或 / 开头的地址"
+        - $formkit: text
+          name: apiEndpoint
+          label: 自定义上报地址
+          placeholder: "/stats/api/event"
+          help: "可选。统计脚本上报事件的地址，留空则使用脚本所在域名下的 /api/event。"
+          validation:
+            - - matches
+              - "/^(?:https?:\\/)?\\/(?!\\/)/"
+          validationMessages:
+            matches: "请填写以 http://、https:// 或 / 开头的地址"
+
+    - group: stats
+      label: 数据面板
+      formSchema:
+        - $formkit: secret
+          name: apiKeySecret
+          label: API 密钥
+          descriptionPreset: tinytraffic API
+          help: "在 tinytraffic 的「账户 → API 密钥」中创建，查看数据只需要「只读」权限。密钥保存在 Halo 的密钥中，不会发送到浏览器。"
+          requiredKeys:
+            - key: apiKey
+              help: "以 tt_ 开头的 tinytraffic API 密钥"
+        - $formkit: switch
+          name: allowPrivateNetwork
+          label: 允许访问内网地址
+          value: false
+          help: "默认情况下，Halo 服务器不会向解析到内网或本机的地址发送请求。只有当 tinytraffic 部署在内网（例如同一台机器或家庭网络）时才需要开启。"
